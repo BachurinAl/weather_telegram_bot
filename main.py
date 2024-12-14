@@ -6,22 +6,25 @@ from datetime import datetime
 import locale
 
 
-
 locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
 bot = telebot.TeleBot('6269453155:AAH-OydCWcs6gQTrW2MqXlhljBTRb7kpFdU')
 API = '91fe06d48438475065d56d66515c1012'
+
 
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.send_message(message.chat.id, f'{message.from_user.first_name}, напиши мне название нужного города...')
 
+
 @bot.message_handler(commands=['help'])
-def help(message):
+def helping(message):
     bot.send_message(message.chat.id, 'Если есть пожелания, то напиши сюда \U0001F449 <a href="@Bachurin_A">@Bachurin_A</a>', parse_mode='html')
+
 
 @bot.message_handler(commands=['site'])
 def site(message):
     bot.send_message(message.chat.id, 'Для ознакомления с проектами разработчика переходи по ссылке <a href="https://github.com/BachurinAl">https://github.com/BachurinAl</a>', parse_mode='html')
+
 
 @bot.message_handler(content_types=['text'])
 def get_weather(message):
@@ -62,6 +65,7 @@ def get_weather(message):
                                           f'<b>Хорошего дня!</b> \U0001F44D', reply_markup=markup, parse_mode='html')
     except KeyError:
         bot.reply_to(message, 'Не знаю такой город, проверьте название', reply_markup=markup)
+
 
 bot.polling(none_stop=True)
 
